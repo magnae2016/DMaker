@@ -1,5 +1,6 @@
 package com.fastcam.programming.dmaker.service;
 
+import com.fastcam.programming.dmaker.dto.CreateDeveloper;
 import com.fastcam.programming.dmaker.entity.Developer;
 import com.fastcam.programming.dmaker.repository.DeveloperRepository;
 import com.fastcam.programming.dmaker.type.DeveloperLevel;
@@ -14,7 +15,7 @@ public class DMakerService {
     private final DeveloperRepository developerRepository;
 
     @Transactional
-    public void createDeveloper() {
+    public void createDeveloper(CreateDeveloper.Request request) {
         Developer developer = Developer.builder()
                 .developerLevel(DeveloperLevel.SENIOR)
                 .developerSkillType(DeveloperSkillType.FRONT_END)
