@@ -3,14 +3,13 @@ package com.fastcam.programming.dmaker.controller;
 import com.fastcam.programming.dmaker.dto.CreateDeveloper;
 import com.fastcam.programming.dmaker.dto.DeveloperDetailDto;
 import com.fastcam.programming.dmaker.dto.DeveloperDto;
-import com.fastcam.programming.dmaker.entity.Developer;
+import com.fastcam.programming.dmaker.dto.EditDeveloper;
 import com.fastcam.programming.dmaker.service.DMakerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -23,7 +22,7 @@ public class DMakerController {
     public List<DeveloperDto> getAllDevelopers() {
         log.info("GET /developers HTTP/1.1");
 
-        return dMakerService.getAllDevelopers();
+        return dMakerService.getAllEmployedDevelopers();
     }
 
     @GetMapping("/developers/{memberId}")
@@ -38,5 +37,15 @@ public class DMakerController {
         log.info("request : {}", request);
 
         return dMakerService.createDeveloper(request);
+    }
+
+    @PutMapping("/developer/{memberId}")
+    public DeveloperDetailDto editDeveloper(@PathVariable String memberId, @Valid @RequestBody EditDeveloper.Request developer) {
+        return dMakerService.editDeveloper(memberId, developer);
+    }
+
+    @DeleteMapping("/developer/{memberId}")
+    public DeveloperDetailDto deleteDeveloper(@PathVariable String memberId) {
+        return dMakerService.deleteDeveloper(memberId);
     }
 }
